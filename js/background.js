@@ -35,14 +35,14 @@ var PULLSIZE = 95;
 var PULLSTRENGTH = 1;
 
 var hpadding = 20;
+var hasDrawnOnce = false;
+var shouldDrawOnce = true;
 
 // SETUP 
 function setup() {
    if(isMullum) {
 	   colorMode(HSB, 255);
    }
-	
-   frameRate(0);
 
    var brect = document.getElementById("body").getBoundingClientRect();
    var canvas = createCanvas(brect.width, brect.height * 4);
@@ -66,103 +66,105 @@ function setup() {
       noff += COLORSEV;
       grid.push(tgrid);
    }
-   
-   draw();
 }
 
 // DRAW 
 function draw() {
-   background(66);
-   
-   //console.log("frame");
-   if(isAlive) {
-      var toff = xoff;
-      for(var i = 1; i < grid.length - 1; i++) {
-         for(var j = 1; j < grid[i].length - 1; j++) {
-            var tMOVESPEED = MOVESPEED;
-            if(i == 1 || j == 1 || i == grid.length - 2 || grid[i].length - 2) {
-               tMOVESPEED *= .1;
-            }
-            if(i == 2 || j == 2 || i == grid.length - 3 || grid[i].length - 3) {
-               tMOVESPEED *= .25;
-            }
-            if(i == 3 || j == 3 || i == grid.length - 4 || grid[i].length - 4) {
-               tMOVESPEED *= .5;
-            }
-            
-            if(isTorch && isMullum) {
-               grid[i][j].aggG = Math.sqrt(grid[i][j].aggG + 46 * 46);//
-               grid[i][j].aggB = Math.sqrt(grid[i][j].aggB + 60 * 60);//
-            }
-            else {
-               //grid[i][j].aggR += (noise(toff) - .5) * tMOVESPEED * 1.2; // hue // r
-               //grid[i][j].aggG += (noise(toff + 109) - .5) * tMOVESPEED * 1.2; // sat // g
-               //grid[i][j].aggB += (noise(toff + 209) - .5) * tMOVESPEED * 1.2; // bri // b
-            }
-            if(isTorch) {
-               var dadj = torchSize - distance(grid[i][j], stp4(pmouseX, mouseX), stp4(pmouseY, mouseY));
-               if(dadj < 0) {
-                  dadj = 0;
-               }
-               grid[i][j].aggG += dadj / 2;
-               grid[i][j].aggB += dadj;               
-            }
+   if(hasDrawnOnce && shouldDrawOnce) {
+	   background(66);
 
-            //grid[i][j].x += (noise(toff + 309) - .5) * tMOVESPEED * 4;
-            //grid[i][j].y += (noise(toff + 409) - .5) * tMOVESPEED * 4;
-            //console.log((noise(toff) - .5) * MOVESPEED * 1.5);
+	   //console.log("frame");
+	   if(isAlive) {
+		  var toff = xoff;
+		  for(var i = 1; i < grid.length - 1; i++) {
+			 for(var j = 1; j < grid[i].length - 1; j++) {
+				var tMOVESPEED = MOVESPEED;
+				if(i == 1 || j == 1 || i == grid.length - 2 || grid[i].length - 2) {
+				   tMOVESPEED *= .1;
+				}
+				if(i == 2 || j == 2 || i == grid.length - 3 || grid[i].length - 3) {
+				   tMOVESPEED *= .25;
+				}
+				if(i == 3 || j == 3 || i == grid.length - 4 || grid[i].length - 4) {
+				   tMOVESPEED *= .5;
+				}
 
-            toff += MOVESEV * .8;
+				if(isTorch && isMullum) {
+				   grid[i][j].aggG = Math.sqrt(grid[i][j].aggG + 46 * 46);//
+				   grid[i][j].aggB = Math.sqrt(grid[i][j].aggB + 60 * 60);//
+				}
+				else {
+				   //grid[i][j].aggR += (noise(toff) - .5) * tMOVESPEED * 1.2; // hue // r
+				   //grid[i][j].aggG += (noise(toff + 109) - .5) * tMOVESPEED * 1.2; // sat // g
+				   //grid[i][j].aggB += (noise(toff + 209) - .5) * tMOVESPEED * 1.2; // bri // b
+				}
+				if(isTorch) {
+				   var dadj = torchSize - distance(grid[i][j], stp4(pmouseX, mouseX), stp4(pmouseY, mouseY));
+				   if(dadj < 0) {
+					  dadj = 0;
+				   }
+				   grid[i][j].aggG += dadj / 2;
+				   grid[i][j].aggB += dadj;               
+				}
 
-            if(mouseControl && (   distance(grid[i][j], stp1(pmouseX, mouseX), stp1(pmouseY, mouseY)) < PULLSIZE 
-                                || distance(grid[i][j], stp4(pmouseX, mouseX), stp4(pmouseY, mouseY)) < PULLSIZE
-                                || distance(grid[i][j], stp7(pmouseX, mouseX), stp7(pmouseY, mouseY)) < PULLSIZE )) {
-              grid[i][j].x -= (pmouseX - mouseX) / PULLSTRENGTH / distance(grid[i][j], stp4(pmouseX, mouseX), stp4(mouseY, mouseY));
-              grid[i][j].y -= (pmouseY - mouseY) / PULLSTRENGTH / distance(grid[i][j], stp4(pmouseX, mouseX), stp4(mouseY, mouseY));
-            }
-         }
-      }
-      xoff += MOVESEV * 4;
-   }   
-   
-   for(var i = 0; i < grid.length; i++) {
-      for(var j = 0; j < grid[i].length; j++) {
-         try {
-            noStroke();
-            //ellipse(grid[i][j].x, grid[i][j].y, 3, 3);
-            
-            if(distance(grid[i][j], grid[i + 1][j + 1]) < distance(grid[i][j + 1], grid[i + 1][j]) || !choosesShortest){
-               var tp = grid[i][j];
-               var ep = grid[i + 1][j + 1];
-               var sp1 = grid[i][j + 1];
-               var sp2 = grid[i + 1][j];
-            }
-            else {
-               var tp = grid[i][j + 1];
-               var ep = grid[i + 1][j];
-               var sp1 = grid[i][j];
-               var sp2 = grid[i + 1][j + 1];
-            }
-            //console.log(i + "  " + j);
+				//grid[i][j].x += (noise(toff + 309) - .5) * tMOVESPEED * 4;
+				//grid[i][j].y += (noise(toff + 409) - .5) * tMOVESPEED * 4;
+				//console.log((noise(toff) - .5) * MOVESPEED * 1.5);
 
-	         if(shouldStroke)
-               stroke(126);
-            else
-               noStroke();
-            var tRGB = getRGBAgg(tp, sp1, sp1);
-            fill(tRGB[0], tRGB[1], tRGB[2]);
-            
-            triangle(tp.x, tp.y, sp1.x, sp1.y, sp2.x, sp2.y);
+				toff += MOVESEV * .8;
 
-            var tRGB = getRGBAgg(ep, sp1, sp2);
-            fill(tRGB[0], tRGB[1], tRGB[2]);
-            
-            triangle(ep.x, ep.y, sp1.x, sp1.y, sp2.x, sp2.y);
-         }
-         catch(err) {
-            
-         }
-      }
+				if(mouseControl && (   distance(grid[i][j], stp1(pmouseX, mouseX), stp1(pmouseY, mouseY)) < PULLSIZE 
+									|| distance(grid[i][j], stp4(pmouseX, mouseX), stp4(pmouseY, mouseY)) < PULLSIZE
+									|| distance(grid[i][j], stp7(pmouseX, mouseX), stp7(pmouseY, mouseY)) < PULLSIZE )) {
+				  grid[i][j].x -= (pmouseX - mouseX) / PULLSTRENGTH / distance(grid[i][j], stp4(pmouseX, mouseX), stp4(mouseY, mouseY));
+				  grid[i][j].y -= (pmouseY - mouseY) / PULLSTRENGTH / distance(grid[i][j], stp4(pmouseX, mouseX), stp4(mouseY, mouseY));
+				}
+			 }
+		  }
+		  xoff += MOVESEV * 4;
+	   }   
+
+	   for(var i = 0; i < grid.length; i++) {
+		  for(var j = 0; j < grid[i].length; j++) {
+			 try {
+				noStroke();
+				//ellipse(grid[i][j].x, grid[i][j].y, 3, 3);
+
+				if(distance(grid[i][j], grid[i + 1][j + 1]) < distance(grid[i][j + 1], grid[i + 1][j]) || !choosesShortest){
+				   var tp = grid[i][j];
+				   var ep = grid[i + 1][j + 1];
+				   var sp1 = grid[i][j + 1];
+				   var sp2 = grid[i + 1][j];
+				}
+				else {
+				   var tp = grid[i][j + 1];
+				   var ep = grid[i + 1][j];
+				   var sp1 = grid[i][j];
+				   var sp2 = grid[i + 1][j + 1];
+				}
+				//console.log(i + "  " + j);
+
+				 if(shouldStroke)
+				   stroke(126);
+				else
+				   noStroke();
+				var tRGB = getRGBAgg(tp, sp1, sp1);
+				fill(tRGB[0], tRGB[1], tRGB[2]);
+
+				triangle(tp.x, tp.y, sp1.x, sp1.y, sp2.x, sp2.y);
+
+				var tRGB = getRGBAgg(ep, sp1, sp2);
+				fill(tRGB[0], tRGB[1], tRGB[2]);
+
+				triangle(ep.x, ep.y, sp1.x, sp1.y, sp2.x, sp2.y);
+			 }
+			 catch(err) {
+
+			 }
+		  }
+	   }
+	   hasDrawnOnce = true;
+	   
    }
 }
 
