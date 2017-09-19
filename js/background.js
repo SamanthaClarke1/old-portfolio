@@ -43,7 +43,7 @@ console.log(colorThemes[rIndex]);
 
 var POINTSx = 24;
 var POINTSy = 40;
-var EXTS = 4; // generated off the edges so that it doesn't go weird
+var EXTS = 2; // generated off the edges so that it doesn't go weird
 var RAND = .82; // only works with 
 var COLORSEV = 0.45; // only works with perlin
 var MOVESEV = 0.03; // only works with isAlive
@@ -93,6 +93,15 @@ function setup(callSize=0) {
       grid.push(tgrid);
    }
 }
+
+window.onresize = function(event) {
+   var brect = document.getElementById("body").getBoundingClientRect();
+	var canvas = createCanvas(brect.width, brect.height * 4 + hpadding);
+	background(66);
+	canvas.parent("sketch-holder");
+	
+	hasDrawnOnce = false;
+};
 
 // DRAW 
 function draw() {
