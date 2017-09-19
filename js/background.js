@@ -166,6 +166,9 @@ function draw() {
 	   hasDrawnOnce = true;
 	   
    }
+   else {
+      noLoop();	
+   }
 }
 
 
