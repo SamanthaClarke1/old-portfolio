@@ -41,6 +41,8 @@ function setup() {
    if(isMullum) {
 	   colorMode(HSB, 255);
    }
+	
+   frameRate(0);
 
    var brect = document.getElementById("body").getBoundingClientRect();
    var canvas = createCanvas(brect.width, brect.height * 4);
