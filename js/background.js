@@ -70,7 +70,7 @@ function setup() {
 
 // DRAW 
 function draw() {
-   if(hasDrawnOnce && shouldDrawOnce) {
+   if(!hasDrawnOnce || !shouldDrawOnce) {
 	   background(66);
 
 	   //console.log("frame");
