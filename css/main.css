@@ -1,29 +1,110 @@
-* {
+      /* ===== 
+         FONTS
+         ===== */
+
+@font-face{ 
+   font-family: 'Neon';
+   src: url('../fonts/title.ttf');
+}
+
+      /* ========== 
+         FIRST PAGE
+         ========== */
+
+#body {
+   width: 100vw;
+   height: 100vh;
    margin: 0px;
    padding: 0px;
+   background: grey;
 }
-#body {
-   width: 100%;
-   height: 100vh;
-}
+
 #sketch-holder {
    z-index: -1;
    overflow: hidden;
    position: absolute;
    height: 100%;
 }
+
 #wrapper {
-   width: 100%;
-   padding: 10px;
+   min-height: 100vh;
    z-index: 100;
-   background: rgba(123, 123, 123, 0.6);
-   
+   /*background: rgba(123, 123, 123, 0.6);*/
    color: white;
-   font-family: 'Courgette', cursive;
 }
-#whereareyou {
-   height: 80%;
-   width: 100%;
-   padding: 0px;
-   margin: 0px;
+
+#sam {
+   border: 5px solid white;
+   border-radius: 50%;
+   margin: 7% auto 5% auto;
+   height: 40%;
+}
+
+#title {
+   font-family: 'Neon', cursive;
+   font-size: 5em;
+   margin-bottom: 20%;
+}
+
+#scroll {
+   transition: all 300ms ease-out;
+}
+
+#scroll:hover {
+   transform: scale(1.2);
+   cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+svg {
+    width: 30px;
+    max-height: 40px;
+    display: inline-block;
+}
+
+.arrow-down path {
+	stroke: white;
+	fill: transparent;
+	stroke-width: 4px;	
+	animation: arrow 2s infinite;
+	-webkit-animation: arrow 2s infinite; 
+
+}
+
+@keyframes arrow
+{
+0% {opacity:0}
+40% {opacity:.8}
+80% {opacity:0}
+100% {opacity:0}
+}
+
+@-webkit-keyframes arrow /*Safari and Chrome*/
+{
+0% {opacity:0}
+40% {opacity:.8}
+80% {opacity:0}
+100% {opacity:0}
+}
+
+.arrow-down path.a1 {
+	animation-delay:-1s;
+	-webkit-animation-delay:-1s; /* Safari 和 Chrome */
+}
+
+.arrow-down path.a2 {
+	animation-delay:-0.5s;
+	-webkit-animation-delay:-0.5s; /* Safari 和 Chrome */
+}
+
+.arrow-down path.a3 {	
+	animation-delay:0s;
+	-webkit-animation-delay:0s; /* Safari 和 Chrome */
 }

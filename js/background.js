@@ -1,9 +1,13 @@
 // samuel clarke 2017/09/17
+/* global width height background createCanvas colorMode HSB setup draw mouseX mouseY pmouseX pmouseY */
+/* global stroke noStroke fill triangle noLoop noise map key redraw windowHeight windowWidth */
+/* global $ */
+/* global json */
 
 console.log("Background animation by Samuel Clarke. 17/09/2017. ");
 console.log("Delaunay Triangulation: https://en.wikipedia.org/wiki/Delaunay_triangulation .");
 
-var grid = []
+var grid = [];
 var xoff = Math.random() * 21632;
 
 var isPerlin = true;
@@ -20,14 +24,28 @@ var isTorch = false; // experimental
 var torchSize = 1000; // only works with isTorch
 
 var isMullum = true;
-var mBlue = 304;//280;//216; // only if isMullum
-var mOrange = 204;//104;//184; // only if isMullum
 
-var POINTSx = 22;
-var POINTSy = 48;
+var settings, colorThemes, rIndex, mBlue, mOrange = "";
+var JSONHasLoaded = false;
+
+
+colorThemes = json["themes"];
+
+rIndex = Math.floor(Math.random() * colorThemes.length);
+mBlue = colorThemes[rIndex]["triLim"][0];//280;//216; // only if isMullum
+mOrange = colorThemes[rIndex]["triLim"][1];//104;//184; // only if isMullum
+
+var briADJ = colorThemes[rIndex]["bri"];
+var satADJ = colorThemes[rIndex]["sat"];
+
+console.log(colorThemes[rIndex]);
+
+
+var POINTSx = 24;
+var POINTSy = 40;
 var EXTS = 4; // generated off the edges so that it doesn't go weird
-var RAND = 0.85; // only works with not perlin / random
-var COLORSEV = 0.5; // only works with perlin
+var RAND = .82; // only works with 
+var COLORSEV = 0.45; // only works with perlin
 var MOVESEV = 0.03; // only works with isAlive
 var MOVESPEED = 50.4; // only works with isAlive
 
@@ -39,19 +57,27 @@ var hasDrawnOnce = false;
 var shouldDrawOnce = true;
 
 // SETUP 
-function setup() {
-   if(isMullum) {
-	   colorMode(HSB, 255);
-   }
-
-   var brect = document.getElementById("body").getBoundingClientRect();
-   var canvas = createCanvas(brect.width, brect.height * 4);
-   background(66);
-   canvas.parent("sketch-holder");
+function setup(callSize=0) {
+	POINTSx *= windowWidth / windowHeight;
+	console.log(windowWidth / windowHeight);
+	
+	if(windowWidth > 1300 && windowHeight > 900) {
+		POINTSx *= .9;
+		POINTSy *= .9;
+	}
+	
+	if(isMullum) {
+		   colorMode(HSB, 360);
+	}
+	
+	var brect = document.getElementById("body").getBoundingClientRect();
+	var canvas = createCanvas(brect.width, brect.height * 4 + hpadding);
+	background(66);
+	canvas.parent("sketch-holder");
   
    var noff = 0;
    for(var i = -EXTS; i < POINTSy + EXTS; i++) {
-      var ei = (i + (Math.random() - .5) * RAND) * (height / POINTSy);
+      //var ei = (i + (Math.random() - .5) * RAND) * (height / POINTSy);
       var tgrid = [];
       var nxoff = 0;
 
@@ -167,7 +193,6 @@ function draw() {
 	   
    }
    else {
-      noLoop();	
    }
 }
 
@@ -193,13 +218,15 @@ function Point(x, y, xoff, yoff) {
    if(isMullum) {
       // keep in mind this is now HSB
       this.aggR = map(noise(xoff + 500, yoff + 500), 0, 1, mBlue, mOrange) % 255; // HUE 175 = lblue 185 = blue 65 = orange
-      this.aggG = map(noise(xoff + 1500, yoff + 1500), 0, 1, 150, 220); // SAT
-      this.aggB = map(noise(xoff + 2500, yoff + 2500), 0, 1, 175, 290); // BRI
+      this.aggG = map(noise(xoff + 1500, yoff + 1500), 0, 1, 180 * satADJ, 260 * satADJ); // SAT
+      this.aggB = map(noise(xoff + 2500, yoff + 2500), 0, 1, 185 * briADJ, 310 * briADJ); // BRI
    }
    if(colorGoodizer) {
       this.aggR = goodize(this.aggR);
-      this.aggG = goodize(this.aggG);
-      this.aggB = goodize(this.aggB);
+      if(!isMullum) {
+      	this.aggG = goodize(this.aggG);
+      	this.aggB = goodize(this.aggB);
+      }
    }
 }
 

@@ -2,7 +2,9 @@
    <link href="css/main.css" rel="stylesheet"></link>
    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"></link>
    <link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet">
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.5/p5.js"></script>
+   <script src="js/jquery.js"></script>
+   <script src="js/p5.min.js"></script>
+   <script src="js/backsettings.json"></script>
    <script src="js/background.js"></script>
 </head>
 
@@ -10,7 +12,18 @@
    <div id="sketch-holder" class="col-xs-12"></div>
   
    <div id="wrapper" class="col-xs-12 container text-center"> 
-      <h1> I JUST LOVE TRIANGLES DUDE </h1>
-      <img src="https://www.nubimagazine.com/wp-content/uploads/2016/05/vwfeat.jpg" id="whereareyou"></img>
+      
+      <div class="col-xs-1"></div>
+      <img src="img/sam.jpg" id="sam" class="img-responsive"></img>
+      <div class="col-xs-1"></div>
+      
+      <h1 id="title">SAM CLARKE</h1>
+      <!--<img src="img/double-down.png" width="64" height="64" id="scroll"></img>-->
+      <svg class="arrow-down">
+        <path class="a1" d="M0 0 L15 16 L30 0"></path>
+        <path class="a2" d="M0 10 L15 26 L30 10"></path>
+        <path class="a3" d="M0 20 L15 36 L30 20"></path>
+      </svg>
+      
    </div>
 </body>
