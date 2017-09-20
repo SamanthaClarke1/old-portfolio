@@ -2,7 +2,7 @@
 /* global width height background createCanvas colorMode HSB setup draw mouseX mouseY pmouseX pmouseY */
 /* global stroke noStroke fill triangle noLoop noise map key redraw windowHeight windowWidth */
 /* global $ */
-/* global json */
+/* global json rIndex */
 
 console.log("Background animation by Samuel Clarke. 17/09/2017. ");
 console.log("Delaunay Triangulation: https://en.wikipedia.org/wiki/Delaunay_triangulation .");
@@ -25,13 +25,12 @@ var torchSize = 1000; // only works with isTorch
 
 var isMullum = true;
 
-var settings, colorThemes, rIndex, mBlue, mOrange = "";
+var settings, colorThemes, mBlue, mOrange = "";
 var JSONHasLoaded = false;
 
 
 colorThemes = json["themes"];
 
-rIndex = Math.floor(Math.random() * colorThemes.length);
 mBlue = colorThemes[rIndex]["triLim"][0];//280;//216; // only if isMullum
 mOrange = colorThemes[rIndex]["triLim"][1];//104;//184; // only if isMullum
 
@@ -41,8 +40,8 @@ var satADJ = colorThemes[rIndex]["sat"];
 console.log(colorThemes[rIndex]);
 
 
-var POINTSx = 24;
-var POINTSy = 40;
+var POINTSx = 19;
+var POINTSy = 54;
 var EXTS = 2; // generated off the edges so that it doesn't go weird
 var RAND = .82; // only works with 
 var COLORSEV = 0.45; // only works with perlin

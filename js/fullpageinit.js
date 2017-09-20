@@ -2,7 +2,8 @@
 $('document').ready(function() {
     $('#fullpage').fullpage({
         css3: true,
-        scrollBar: false
+        scrollBar: false,
+        anchors: ['section1', 'section2', 'section3', 'section4']
     });
 });
 

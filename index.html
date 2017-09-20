@@ -1,15 +1,31 @@
 <head>
+   <!-- main css file -->
    <link href="css/main.css" rel="stylesheet"></link>
+   <!-- bootstrap4 -->
    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"></link>
+   <!-- Fonts -->
    <link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet">
+   <!-- fullPage.css -->
    <link rel="stylesheet" type="text/css" href="js/fullPage/jquery.fullPage.css" />
+   
+   <!-- JQuery -->
    <script src="js/jquery.js"></script>
+   <!-- fullPage.js / fullPage.jquery.js -->
    <script src="js/fullPage/vendors/jquery.easings.min.js"></script>
    <script type="text/javascript" src="js/fullPage/jquery.fullPage.min.js"></script>
+   <!-- p5.js -->
    <script src="js/p5.min.js"></script>
-   <script src="js/backsettings.json"></script>
+   <!-- mo.js -->
+   <!--script src="https://cdn.jsdelivr.net/mojs/latest/mo.min.js"></script-->
+   <!-- color settings -->
+   <script src="js/backsettings.js"></script>
+   <!-- background -->
    <script src="js/background.js"></script>
+   <!-- burst animation on load  -->
+   <!--script src="js/burst.js"></script-->
+   <!-- setup for fullPage.js -->
    <script type="text/javascript" src="js/fullpageinit.js"></script>
+   <script type="text/javascript" src="js/colorizer.js"></script>
 </head>
 
 <body id="body">
@@ -20,56 +36,98 @@
       
       <div class="wrapperm section col-xs-12 container text-center"> 
          
-         <div class="col-xs-1"></div>
-         <img src="img/sam.jpg" id="sam" class="img-responsive"></img>
-         <div class="col-xs-1"></div>
+         <div class="slide">
+            <div class="col-xs-1"></div>
+            <img src="img/sam.jpg" id="sam" class="img-responsive"></img>
+            <div class="col-xs-1"></div>
+            
+            <h1 id="title" class="resptxt">SAM CLARKE</h1>
+            <!--<img src="img/double-down.png" width="64" height="64" id="scroll"></img>-->
+         </div>
          
-         <h1 id="title">SAM CLARKE</h1>
-         <!--<img src="img/double-down.png" width="64" height="64" id="scroll"></img>-->
-         <div class="absArr text-center">
-            <svg class="arrow-down">
-               <path class="a1" d="M0 0 L15 16 L30 0"></path>
-               <path class="a2" d="M0 10 L15 26 L30 10"></path>
-               <path class="a3" d="M0 20 L15 36 L30 20"></path>
-            </svg>
+         <div class="absArr text-center" style="margin-top: -55px;">
+            <a href="#section2">
+               <svg class="arrow-down">
+                  <path class="a1" d="M0 0 L15 16 L30 0"></path>
+                  <path class="a2" d="M0 10 L15 26 L30 10"></path>
+                  <path class="a3" d="M0 20 L15 36 L30 20"></path>
+               </svg>
+            </a>
          </div>
          
       </div>
       
       <div class="wrapperm section col-xs-12 container text-center">
-                           <!-- up arrow for this page -->
+         
+         <!-- up arrow for this page -->
          <div class="absArr text-center" style="margin-top: 20px;">
-            <svg class="arrow-down">
-               <path class="a1" d="M0 38 L15 22 L30 38"></path>
-               <path class="a2" d="M0 28 L15 12 L30 28"></path>
-               <path class="a3" d="M0 18 L15 02 L30 18"></path>
-            </svg>
+            <a href="#section1">
+               <svg class="arrow-down">
+                  <path class="a1" d="M0 38 L15 22 L30 38"></path>
+                  <path class="a2" d="M0 28 L15 12 L30 28"></path>
+                  <path class="a3" d="M0 18 L15 02 L30 18"></path>
+               </svg>
+            </a>
          </div>
          
-         <div class="slide bigText">Example A</div>
-         <div class="slide bigText">Example B</div>
-         <div class="slide bigText">Example C</div>
+         <div class="slide bigText">
+            <div class="col-sm-12 row">
+               <div class="col-sm-6 textSlide">
+                  <p> Foo </p>
+               </div>
+               <div class="col-sm-6 imgSlide">
+                  <p> Bar </p>
+               </div>
+            </div>
+         </div>
+         <div class="slide bigText">
+            <div class="col-sm-12 row">
+               <div class="col-sm-6 textSlide">
+                  <p> Foo </p>
+               </div>
+               <div class="col-sm-6 imgSlide">
+                  <p> Bar </p>
+               </div>
+            </div>
+         </div>
+         <div class="slide bigText">
+            <div class="col-sm-12 row">
+               <div class="col-sm-6 textSlide">
+                  <p> Foo </p>
+               </div>
+               <div class="col-sm-6 imgSlide">
+                  <img src="/img/d3flags.png" class="img-fluid">
+               </div>
+            </div>
+         </div>
+         
          <!-- down arrow for this page -->
          <div class="absArr text-center" style="margin-top: -55px">
-            <svg class="arrow-down">
-               <path class="a1" d="M0 0 L15 16 L30 0"></path>
-               <path class="a2" d="M0 10 L15 26 L30 10"></path>
-               <path class="a3" d="M0 20 L15 36 L30 20"></path>
-            </svg>
-         </div>
-         
-         <!-- up arrow for next page -->
-         <div class="absArr text-center" style="margin-top: 20px;">
-            <svg class="arrow-down">
-               <path class="a1" d="M0 38 L15 22 L30 38"></path>
-               <path class="a2" d="M0 28 L15 12 L30 28"></path>
-               <path class="a3" d="M0 18 L15 02 L30 18"></path>
-            </svg>
+            <a href="#section3">
+               <svg class="arrow-down">
+                  <path class="a1" d="M0 0 L15 16 L30 0"></path>
+                  <path class="a2" d="M0 10 L15 26 L30 10"></path>
+                  <path class="a3" d="M0 20 L15 36 L30 20"></path>
+               </svg>
+            </a>
          </div>
       </div>
       
       <div class="wrapperm section col-xs-12 container text-center">
-         <h1 class="bigText">Footer</h1>
+         <!-- up arrow for next page -->
+         <div class="absArr text-center" style="margin-top: 20px;">
+            <a href="#section2">
+               <svg class="arrow-down">
+                  <path class="a1" d="M0 38 L15 22 L30 38"></path>
+                  <path class="a2" d="M0 28 L15 12 L30 28"></path>
+                  <path class="a3" d="M0 18 L15 02 L30 18"></path>
+               </svg>
+            </a>
+         </div>
+         
+         <div class="slide">
+            <h1 class="bigText">Footer</h1>
+         </div>
       </div>
       
    </div>
