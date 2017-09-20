@@ -4,8 +4,8 @@ var json = {
     		"triLim": [380, 440],
     		"sat": 1.25,
     		"bri": 1.15,
-    		"textBack": "rgba(150, 1, 255, 0.7)",
-    		"imgBack": "rgba(118, 1, 207, 0.7)",
+    		"textBack": "rgba(118, 1, 207, 0.7)",
+    		"imgBack": "rgba(150, 1, 255, 0.7)",
     		"textColor": "#f9f9f9"
     	},
     	{
@@ -68,16 +68,16 @@ var json = {
     		"triLim": [180, 240],
     		"sat": 1.2,
     		"bri": 1.15,
-    		"textBack": "rgba(129, 218, 255, 0.7)",
-    		"imgBack": "rgba(40, 160, 152, 0.7)",
+    		"textBack": "rgba(40, 160, 152, 0.7)",
+    		"imgBack": "rgba(129, 218, 255, 0.7)",
     		"textColor": "#090909"
     	},
     	{
     		"triLim": [130, 230],
     		"sat": 0.92,
     		"bri": 1.15,
-    		"textBack": "rgba(129, 218, 255, 0.7)",
-    		"imgBack": "rgba(40, 160, 152, 0.7)",
+    		"textBack": "rgba(40, 160, 152, 0.7)",
+    		"imgBack": "rgba(129, 218, 255, 0.7)",
     		"textColor": "#090909"
     	},
     	{
